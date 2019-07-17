@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
 	public bool isMovingBack;
 	public bool isMovingLeft;
 	public bool isMovingRight;
+    public Camera playerCammera;
 	
 
 	private void Start()
 	{
 		rigidBody = GetComponent<Rigidbody>();
-	}
+        playerCammera = gameObject.GetComponentInChildren<Camera>();
+    }
 
 	public void ButtonInput(string input)
 	{
@@ -66,12 +68,12 @@ public class PlayerController : MonoBehaviour
 	}
 	private void MoveBack()
 	{
-		rigidBody.AddForce(-(transform.forward) * movementSpeed);
+		rigidBody.AddForce(transform.forward * -movementSpeed);
 	}
 
 	private void FixedUpdate()
 	{
-		if (isMovingLeft && !isMovingRight)
+     if (isMovingLeft && !isMovingRight)
 		{
 			MoveLeft();
 		}
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
 			MoveForward();
 		}
 
-		if (isMovingBack && !isMovingBack)
+		if (isMovingBack && !isMovingForward)
 		{
 			MoveBack();
 		}

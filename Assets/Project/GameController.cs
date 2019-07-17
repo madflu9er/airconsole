@@ -35,9 +35,15 @@ public class GameController : MonoBehaviour
 		{
 			return;
 		}
-		
-		GameObject newPlayer = Instantiate(playerPrefab, transform.position, transform.rotation) as GameObject;
-		players.Add(deviceId, newPlayer.GetComponent<PlayerController>());
+       
+        GameObject newPlayer = Instantiate(playerPrefab, transform.position, transform.rotation) as GameObject;
+        newPlayer.name = "Player" + deviceId;
+        if (players.Count == 1)
+        {
+            newPlayer.GetComponentInChildren<Camera>().rect = new Rect(0f, 0.5f, 1f, 1f);
+        }
+        players.Add(deviceId, newPlayer.GetComponent<PlayerController>());
+     
 	}
 
 	void OnMessage(int from, JToken data)
